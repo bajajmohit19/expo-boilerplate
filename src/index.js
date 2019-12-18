@@ -1,7 +1,10 @@
 import React from 'react';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View } from 'react-native'
+// import { NativeRouter } from "react-router-native"
 import { Provider } from 'react-redux'
-import store from './store'
+// import { ConnectedRouter } from 'connected-react-router'
+
+import store, { history } from './store'
 import App from './containers/app'
 
 class Main extends React.Component {
@@ -9,7 +12,11 @@ class Main extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <App />
+        {/* <NativeRouter history={history}>
+          <ConnectedRouter history={history}> */}
+            <App />
+          {/* </ConnectedRouter>
+        </NativeRouter> */}
       </Provider>
     )
   }

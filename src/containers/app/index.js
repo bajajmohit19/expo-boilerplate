@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { createContext } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { showLoader, hideLoader } from '../../modules/actions';
+import { StyleSheet, Text, View, Button, Image, SafeAreaView, DrawerLayoutAndroid } from 'react-native'
+import { createAppContainer } from 'react-navigation'
+import { createDrawerNavigator } from 'react-navigation-drawer'
+import { NativeRouter, Route, Link } from "react-router-native"
+import { Container, Header, Content, Footer } from 'native-base'
+import { Drawer } from 'react-native-paper'
+
+const Context = createContext()
+
+import menu from '../../routes'
+import { showLoader, hideLoader } from '../../modules/actions'
 
 class App extends React.Component {
     state = {
-        text: "Hello World"
+
+    }
+    componentDidMount() {
+        // this.openDrawer()
+        // this.drawer.openDrawer()
+
     }
     render() {
-        const { text } = this.state
+        const { } = this.state
         const styles = StyleSheet.create({
             container: {
                 flex: 1,
@@ -17,29 +31,92 @@ class App extends React.Component {
                 justifyContent: 'center',
             },
         })
-
         return (
+            <Container>
+                <Header ><SafeAreaView><Text>Header</Text></SafeAreaView></Header>
 
-            <View style={styles.container}>
-                <Text>{text}</Text>
-                <Button
-                    onPress={() => {
-                        this.setState({ text: "Button Pressed" })
-                        this.props.dispatch(showLoader())
-                        alert(`buttonLoading is ${this.props.buttonLoading}`)
-                    }}
-                    title={'Press Me'}
-                />
-            </View>
+                <Content>
+                        <Drawer.Item label="First Item" active={true} />
+                        <Text>Main View</Text>
+                        <Button title={'PressMe'} onPress={() => {
+
+                        }} />
+                </Content>
+                <Footer />
+            </Container>
         )
     }
 }
 
 
+class MyHomeScreen extends React.Component {
+    static navigationOptions = {
+      drawerLabel: 'Home',
+      drawerIcon: ({ tintColor }) => (
+        <Image
+          source={require('./chats-icon.png')}
+          style={[styles.icon, { tintColor: tintColor }]}
+        />
+      ),
+    }
+  
+    render() {
+      return (
+        <Button
+          onPress={() => this.props.navigation.navigate('Notifications')}
+          title="Go to notifications"
+        />
+      )
+    }
+  }
+  
+  class MyNotificationsScreen extends React.Component {
+    static navigationOptions = {
+      drawerLabel: 'Notifications',
+      drawerIcon: ({ tintColor }) => (
+        <Image
+          source={require('./notif-icon.png')}
+          style={[styles.icon, { tintColor: tintColor }]}
+        />
+      ),
+    }
+  
+    render() {
+      return (
+        <Button
+          onPress={() => this.props.navigation.goBack()}
+          title="Go back home"
+        />
+      )
+    }
+  }
+  
+  const styles = StyleSheet.create({
+    icon: {
+      width: 24,
+      height: 24,
+    },
+  })
+  
+  const MyDrawerNavigator = createDrawerNavigator({
+    Home: {
+      screen: MyHomeScreen,
+      headerLeft: ()=>{return (<Text>Bach</Text>)}
+    },
+    Notifications: {
+      screen: MyNotificationsScreen,
+    },
+  }, {
+    // drawerType: 'slide'
+  })
+  
+  const MyApp = createAppContainer(MyDrawerNavigator)
+
 const mapStateToProps = (state) => {
+    console.log('mapStateToProps', state)
     return ({
-        buttonLoading: state.global.buttonLoading,
-        categories: state.global.categories,
+        // buttonLoading: state.global.buttonLoading,
+        // categories: state.global.categories,
         // currentUser: global.currentUser
     })
 }
@@ -51,6 +128,6 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(App)
+)(MyApp)
 
 // export default App
