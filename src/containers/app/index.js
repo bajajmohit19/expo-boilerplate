@@ -3,114 +3,48 @@ import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Button, Image, SafeAreaView } from 'react-native'
 import { createAppContainer } from 'react-navigation'
 import { createDrawerNavigator } from 'react-navigation-drawer'
+import { createStackNavigator } from 'react-navigation-stack'
+import _ from 'lodash'
 // import { NativeRouter, Route, Link } from "react-router-native"
 // import { Container, Header, Content, Footer } from 'native-base'
-import { Drawer } from 'react-native-paper'
+// import { Drawer } from 'react-native-paper'
 
 import menu from '../../routes'
 import { showLoader, hideLoader } from '../../modules/actions'
 
-// const Context = createContext()
+const styles = StyleSheet.create({
+    icon: {
+        width: 24,
+        height: 24,
+    },
+})
 
-class App extends React.Component {
-    state = {
+const createAppNavigator = () => {
+    let drawerNavigatorOb = {}
+    //loop menu
+    _.each(menu, (Item) => {
+        //  if children doest exist => createDrawerNavigatorObject[key] ....
+        drawerNavigatorOb[Item.key] = {
+            screen: Item.component,
+            navigationOptions: {
+                drawerLabel: Item.title,
+                drawerIcon: ({ tintColor }) => (
+                    <Image
+                        source={require('./notif-icon.png')}
+                        style={[styles.icon, { tintColor: tintColor }]}
+                    />
+                ),
+            }
+        }
+    })
 
-    }
-    componentDidMount() {
-        // this.openDrawer()
-        // this.drawer.openDrawer()
-
-    }
-    render() {
-        const { } = this.state
-        const styles = StyleSheet.create({
-            container: {
-                flex: 1,
-                backgroundColor: '#fff',
-                alignItems: 'center',
-                justifyContent: 'center',
-            },
-        })
-        return (
-            <Container>
-                <Header ><SafeAreaView><Text>Header</Text></SafeAreaView></Header>
-
-                <Content>
-                        <Drawer.Item label="First Item" active={true} />
-                        <Text>Main View</Text>
-                        <Button title={'PressMe'} onPress={() => {
-
-                        }} />
-                </Content>
-                <Footer />
-            </Container>
-        )
-    }
+    const MyDrawerNavigator = createDrawerNavigator(drawerNavigatorOb, {
+        // drawerType: 'slide'
+    })
+    return MyDrawerNavigator
 }
 
-
-class MyHomeScreen extends React.Component {
-    static navigationOptions = {
-      drawerLabel: 'Home',
-      drawerIcon: ({ tintColor }) => (
-        <Image
-          source={require('./chats-icon.png')}
-          style={[styles.icon, { tintColor: tintColor }]}
-        />
-      ),
-    }
-  
-    render() {
-      return (
-        <Button
-          onPress={() => this.props.navigation.navigate('Notifications')}
-          title="Go to notifications"
-        />
-      )
-    }
-  }
-  
-  class MyNotificationsScreen extends React.Component {
-    static navigationOptions = {
-      drawerLabel: 'Notifications',
-      drawerIcon: ({ tintColor }) => (
-        <Image
-          source={require('./notif-icon.png')}
-          style={[styles.icon, { tintColor: tintColor }]}
-        />
-      ),
-    }
-  
-    render() {
-      return (
-        <Button
-          onPress={() => this.props.navigation.goBack()}
-          title="Go back home"
-        />
-      )
-    }
-  }
-  
-  const styles = StyleSheet.create({
-    icon: {
-      width: 24,
-      height: 24,
-    },
-  })
-  
-  const MyDrawerNavigator = createDrawerNavigator({
-    Home: {
-      screen: MyHomeScreen,
-      headerLeft: ()=>{return (<Text>Back</Text>)}
-    },
-    Notifications: {
-      screen: MyNotificationsScreen,
-    },
-  }, {
-    // drawerType: 'slide'
-  })
-  
-  const MyApp = createAppContainer(MyDrawerNavigator)
+const App = createAppContainer(createAppNavigator())
 
 const mapStateToProps = (state) => {
     console.log('mapStateToProps', state)
@@ -128,6 +62,6 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MyApp)
+)(App)
 
 // export default App

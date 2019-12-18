@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import { showLoader, hideLoader } from '../../modules/actions'
 
-class Dashboard extends React.Component {
+class Page2 extends React.Component {
     state = {
-        text: "Hello World"
+        text: "Its Page 2"
     }
     render() {
         const { text } = this.state
@@ -24,9 +24,8 @@ class Dashboard extends React.Component {
                 <Text>{text}</Text>
                 <Button
                     onPress={() => {
-                        this.setState({ text: "Button Pressed" })
                         this.props.dispatch(showLoader())
-                        this.props.navigation.navigate('page1')
+                        this.props.navigation.navigate('dashboard')
                         // alert(`buttonLoading is ${this.props.buttonLoading}`)
                     }}
                     title={'Press Me'}
@@ -52,6 +51,6 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Dashboard)
+)(Page2)
 
 // export default App
