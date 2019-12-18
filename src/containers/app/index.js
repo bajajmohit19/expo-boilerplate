@@ -1,16 +1,16 @@
 import React, { createContext } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, Button, Image, SafeAreaView, DrawerLayoutAndroid } from 'react-native'
+import { StyleSheet, Text, View, Button, Image, SafeAreaView } from 'react-native'
 import { createAppContainer } from 'react-navigation'
 import { createDrawerNavigator } from 'react-navigation-drawer'
-import { NativeRouter, Route, Link } from "react-router-native"
-import { Container, Header, Content, Footer } from 'native-base'
+// import { NativeRouter, Route, Link } from "react-router-native"
+// import { Container, Header, Content, Footer } from 'native-base'
 import { Drawer } from 'react-native-paper'
-
-const Context = createContext()
 
 import menu from '../../routes'
 import { showLoader, hideLoader } from '../../modules/actions'
+
+// const Context = createContext()
 
 class App extends React.Component {
     state = {
@@ -101,7 +101,7 @@ class MyHomeScreen extends React.Component {
   const MyDrawerNavigator = createDrawerNavigator({
     Home: {
       screen: MyHomeScreen,
-      headerLeft: ()=>{return (<Text>Bach</Text>)}
+      headerLeft: ()=>{return (<Text>Back</Text>)}
     },
     Notifications: {
       screen: MyNotificationsScreen,
