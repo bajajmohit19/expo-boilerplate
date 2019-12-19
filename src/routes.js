@@ -16,7 +16,7 @@ const menu = [
     },
     {
         'title': 'Page 1',
-        'icon': 'dashboard',
+        'icon': 'file1',
         'key': 'page1',
         // 'homepage': true,
         'component': Page2,

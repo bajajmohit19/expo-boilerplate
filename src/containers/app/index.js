@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Button, Image, SafeAreaView } from 'react-nativ
 import { createAppContainer } from 'react-navigation'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import { createStackNavigator } from 'react-navigation-stack'
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons, AntDesign } from '@expo/vector-icons'
 
 import menu from '../../routes'
 import { showLoader, hideLoader } from '../../modules/actions'
@@ -18,34 +18,71 @@ const styles = StyleSheet.create({
 })
 
 const createAppNavigator = () => {
-    let drawerNavigatorOb = {}
+    // let drawerNavigatorOb = {}
+    // //loop menu
+    // _.each(menu, (item) => {
+    //     //  if children doest exist => createDrawerNavigatorObject[key] ....
+    //     drawerNavigatorOb[item.key] = {
+    //         screen: item.component,
+    //         navigationOptions: {
+    //             drawerLabel: item.title,
+    //             drawerIcon: ({ tintColor }) => (
+    //                 // <Image
+    //                 //     source={require('./notif-icon.png')}
+    //                 //     style={[styles.icon, { tintColor: tintColor }]}
+    //                 // />
+    //                 <AntDesign
+    //                     name={item.icon}
+    //                     size={24}
+    //                     style={{ marginBottom: -3 }}
+    //                     color={tintColor}
+    //                 />
+    //             ),
+    //         }
+    //     }
+    // })
+
+    // const MyDrawerNavigator = createDrawerNavigator(drawerNavigatorOb, {
+    //     // drawerType: 'slide'
+    // })
+    // return MyDrawerNavigator
+
+    
+    let stackNavigatorOb = {}
     //loop menu
-    _.each(menu, (Item) => {
+    _.each(menu, (item) => {
         //  if children doest exist => createDrawerNavigatorObject[key] ....
-        drawerNavigatorOb[Item.key] = {
-            screen: Item.component,
-            navigationOptions: {
-                drawerLabel: Item.title,
-                drawerIcon: ({ tintColor }) => (
-                    // <Image
-                    //     source={require('./notif-icon.png')}
-                    //     style={[styles.icon, { tintColor: tintColor }]}
-                    // />
-                    <Ionicons
-                        name={'md-information-circle'}
-                        size={26}
-                        style={{ marginBottom: -3 }}
-                        color={'#ccc'}
-                    />
-                ),
-            }
+        stackNavigatorOb[item.key] = {
+            screen: item.component,
+            // navigationOptions: {
+            //     drawerLabel: item.title,
+            //     drawerIcon: ({ tintColor }) => (
+            //         // <Image
+            //         //     source={require('./notif-icon.png')}
+            //         //     style={[styles.icon, { tintColor: tintColor }]}
+            //         // />
+            //         <AntDesign
+            //             name={item.icon}
+            //             size={24}
+            //             style={{ marginBottom: -3 }}
+            //             color={tintColor}
+            //         />
+            //     ),
+            // }
         }
     })
 
-    const MyDrawerNavigator = createDrawerNavigator(drawerNavigatorOb, {
+    const MyStackNavigator = createStackNavigator(stackNavigatorOb, {
         // drawerType: 'slide'
     })
+
+    const MyDrawerNavigator = createDrawerNavigator({
+        Home: {
+            screen: MyStackNavigator
+        }
+    })
     return MyDrawerNavigator
+    
 }
 
 const MyApp = createAppContainer(createAppNavigator())
