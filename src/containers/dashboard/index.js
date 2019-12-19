@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import { showLoader, hideLoader } from '../../modules/actions'
+import { Ionicons, FontAwesome } from '@expo/vector-icons'
 
 class Dashboard extends React.Component {
     state = {
@@ -30,6 +31,12 @@ class Dashboard extends React.Component {
                         // alert(`buttonLoading is ${this.props.buttonLoading}`)
                     }}
                     title={'Press Me'}
+                />
+                <FontAwesome
+                    name={'users'}
+                    size={26}
+                    style={{ marginBottom: -3 }}
+                    color={'#ccc'}
                 />
             </View>
         )

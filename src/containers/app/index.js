@@ -1,13 +1,11 @@
+import _ from 'lodash'
 import React, { createContext } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Button, Image, SafeAreaView } from 'react-native'
 import { createAppContainer } from 'react-navigation'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import { createStackNavigator } from 'react-navigation-stack'
-import _ from 'lodash'
-// import { NativeRouter, Route, Link } from "react-router-native"
-// import { Container, Header, Content, Footer } from 'native-base'
-// import { Drawer } from 'react-native-paper'
+import { Ionicons } from '@expo/vector-icons'
 
 import menu from '../../routes'
 import { showLoader, hideLoader } from '../../modules/actions'
@@ -29,9 +27,15 @@ const createAppNavigator = () => {
             navigationOptions: {
                 drawerLabel: Item.title,
                 drawerIcon: ({ tintColor }) => (
-                    <Image
-                        source={require('./notif-icon.png')}
-                        style={[styles.icon, { tintColor: tintColor }]}
+                    // <Image
+                    //     source={require('./notif-icon.png')}
+                    //     style={[styles.icon, { tintColor: tintColor }]}
+                    // />
+                    <Ionicons
+                        name={'md-information-circle'}
+                        size={26}
+                        style={{ marginBottom: -3 }}
+                        color={'#ccc'}
                     />
                 ),
             }
@@ -44,24 +48,6 @@ const createAppNavigator = () => {
     return MyDrawerNavigator
 }
 
-const App = createAppContainer(createAppNavigator())
+const MyApp = createAppContainer(createAppNavigator())
 
-const mapStateToProps = (state) => {
-    console.log('mapStateToProps', state)
-    return ({
-        // buttonLoading: state.global.buttonLoading,
-        // categories: state.global.categories,
-        // currentUser: global.currentUser
-    })
-}
-const mapDispatchToProps = dispatch => {
-    return {
-        dispatch
-    }
-}
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(App)
-
-// export default App
+export default MyApp

@@ -12,7 +12,6 @@
     "androidStatusBar": {
       "backgroundColor": "#000000"
     },
-    "entryPoint": "./src/index.js",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
