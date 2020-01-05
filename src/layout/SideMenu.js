@@ -63,7 +63,7 @@ class SideMenu extends React.Component {
                                         // description="Item description"
                                         key={item.key}
                                         left={props => <FontAwesome name={item.icon} size={26} style={{ marginBottom: -3 }} />}
-                                        onPress={() => { navigation.push(item.key) }}
+                                        onPress={() => { navigation.getChildNavigation('Home').push(item.key) }}
                                     />
                                     <Divider />
                                 </>
@@ -87,7 +87,7 @@ class SideMenu extends React.Component {
                                                         // description="Item description"
                                                         left={props => <Ionicons name={'md-return-right'} size={26} style={{ marginBottom: -3, marginLeft: 10 }} />}
                                                         key={item.key + '-' + child.key}
-                                                        onPress={() => { navigation.push(item.key + '-' + child.key) }}
+                                                        onPress={() => { navigation.getChildNavigation('Home').push(item.key + '-' + child.key) }}
                                                     />)
                                             }
                                         })}

@@ -12,6 +12,9 @@
     "androidStatusBar": {
       "backgroundColor": "#000000"
     },
+    "android": {
+      "package": "com.prototypes.boilerplate"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
