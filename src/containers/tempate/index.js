@@ -4,20 +4,17 @@ import { StyleSheet, Text, View, Button } from 'react-native'
 import { showLoader, hideLoader } from '../../modules/actions'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'
 
-class Dashboard extends React.Component {
+import styles from './styles'
+
+class _______ extends React.Component {
     state = {
         text: "Hello World"
     }
+    componentDidMount() {
+        
+    }
     render() {
         const { text } = this.state
-        const styles = StyleSheet.create({
-            container: {
-                flex: 1,
-                backgroundColor: '#fff',
-                alignItems: 'center',
-                justifyContent: 'center',
-            },
-        })
 
         return (
 
@@ -32,7 +29,12 @@ class Dashboard extends React.Component {
                     }}
                     title={'Press Me'}
                 />
-                <FontAwesome name={'users'} size={26} style={{ marginBottom: -3 }} color={'#ccc'} />
+                <FontAwesome
+                    name={'users'}
+                    size={26}
+                    style={{ marginBottom: -3 }}
+                    color={'#ccc'}
+                />
             </View>
         )
     }
@@ -54,6 +56,6 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Dashboard)
+)(_______)
 
 // export default App

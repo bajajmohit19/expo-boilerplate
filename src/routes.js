@@ -1,5 +1,6 @@
 import Dashboard from './containers/dashboard'
 import Page2 from './containers/page2'
+import Push from './containers/push'
 
 
 const menu = [
@@ -7,7 +8,7 @@ const menu = [
         'title': 'Dashboard',
         'icon': 'dashboard',
         'key': 'dashboard',
-        'homepage': true,
+        // 'homepage': true,
         'component': Dashboard,
         'authority': [
             'admin',
@@ -15,11 +16,35 @@ const menu = [
         ]
     },
     {
-        'title': 'Page 1',
-        'icon': 'file1',
-        'key': 'page1',
+        'title': 'Page',
+        'icon': 'file-o',
+        'key': 'page',
+        // 'component': Page2,
+        'authority': [
+            'admin',
+            'user'
+        ],
+        'children': [
+            {
+                'title': 'Add Branch',
+                'homepage': true,
+                'key': 'add',
+                'component': Page2
+            },
+            {
+                'title': 'Edit Branch',
+                'key': 'edit',
+                'component': Page2,
+                // 'dontShowOnMenu': true
+            }
+        ]
+    },
+    {
+        'title': 'Push',
+        'icon': 'push',
+        'key': 'push',
         // 'homepage': true,
-        'component': Page2,
+        'component': Push,
         'authority': [
             'admin',
             'user'
