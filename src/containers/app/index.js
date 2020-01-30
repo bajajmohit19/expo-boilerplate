@@ -11,6 +11,7 @@ import { Ionicons, AntDesign } from '@expo/vector-icons'
 import menu from '../../routes'
 import SideMenu from "../../layout/SideMenu"
 import Header from "../../layout/Header"
+import Login from '../login'
 import { showLoader, hideLoader } from '../../modules/actions'
 
 
@@ -50,6 +51,9 @@ const createAppNavigator = () => {
     })
 
     const MyDrawerNavigator = createDrawerNavigator({
+        Login: {
+            screen: props => <Login {...props} />
+        },
         Home: {
             screen: MyStackNavigator
         }

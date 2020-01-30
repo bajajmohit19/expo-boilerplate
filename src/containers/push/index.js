@@ -68,6 +68,15 @@ class Push extends React.Component {
     }
     localPush = () => {
         return new Promise(async (resolve) => {
+            const options = {
+                title: 'title',
+                body: 'Body',
+                data: { abc: '123' },
+                categoryId: 'daily_question',
+                // android: {
+                //     sticky: true
+                // }
+            }
             await Notifications.createCategoryAsync('daily_question', [
                 {
                     actionId: 'yes',
@@ -78,15 +87,12 @@ class Push extends React.Component {
                     buttonTitle: 'No',
                 },
             ])
-            Notifications.presentLocalNotificationAsync({
-                title: 'title',
-                body: 'Body',
-                data: { abc: '123' },
-                categoryId: 'daily_question',
+            Notifications.presentLocalNotificationAsync(options)
+            Notifications.presentLocalNotificationAsync({...options, 
                 android: {
                     sticky: true
                 }
-            });
+            })
             return resolve('done')
         })
     }
