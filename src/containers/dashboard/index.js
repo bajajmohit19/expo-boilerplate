@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import { showLoader, hideLoader } from '../../modules/actions'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'
 
-class Dashboard extends React.Component {
+class Dashboard extends Component {
     state = {
         text: "Hello World"
     }
